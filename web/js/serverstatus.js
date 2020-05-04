@@ -109,7 +109,7 @@ function uptime() {
                            ' <ul class="location-info list-styled">'+
 						   '     <li><span class="list-label">实时网络：@network_rxandnetwork_tx</li>'+
                            '     <li><span class="list-label">流量合计：@network_trafficstr</li>'+
-						   '     <li><span class="list-label">IP连接数：共<font color="#0000FF"> @load </font>个连接</span></li>'+
+						   '     <li><span class="list-label">IP连接数：共<font color="#0000FF"> @load </font>个连接 ❤ 已开机：@new_time</span></li>'+
 						   '     <li><span class="list-label">内存信息：@new_mem </span></li>'+
 						   //'     <li><span class="list-label">交换分区：@new_swap</span></li>'+
 						   '     <li><span class="list-label">硬盘信息：@new_hdd</span></li>'+
@@ -174,8 +174,10 @@ function uptime() {
 					new_swap = bytesToSize(result.servers[i].swap_used*1024, 2) + " / " + bytesToSize(result.servers[i].swap_total*1024, 2);
 					var new_hdd = " ";
 					new_hdd = bytesToSize(result.servers[i].hdd_used*1024*1024, 2) + " / " + bytesToSize(result.servers[i].hdd_total*1024*1024, 2);
+					var new_time = " ";
+					new_time = result.servers[i].uptime;
 
-		  shinnerhtml+=shstr.replace("@name",result.servers[i].name).replace("@network_trafficstr",newtrafficstr).replace("@network_rxandnetwork_tx",newnetstr).replace("@type",result.servers[i].type).replace("@online",result.servers[i].online4?'text-success':'text-error').replace("@location",result.servers[i].location).replace("@cpu",result.servers[i].cpu).replace("@load",result.servers[i].load).replace("@new_mem",new_mem).replace("@new_swap",new_swap).replace("@new_hdd",new_hdd);
+		  shinnerhtml+=shstr.replace("@name",result.servers[i].name).replace("@new_time",new_time).replace("@network_trafficstr",newtrafficstr).replace("@network_rxandnetwork_tx",newnetstr).replace("@type",result.servers[i].type).replace("@online",result.servers[i].online4?'text-success':'text-error').replace("@location",result.servers[i].location).replace("@cpu",result.servers[i].cpu).replace("@load",result.servers[i].load).replace("@new_mem",new_mem).replace("@new_swap",new_swap).replace("@new_hdd",new_hdd);
 
           
           
