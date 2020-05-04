@@ -98,22 +98,26 @@ function uptime() {
                        ' <div class="panel panel-block panel-block-sm panel-location">'+
                             '<div class="location-header">'+
 
-                               ' <h3 class="h4"><img src="img/clients/@location.png"> @name <small>@type</small></h3>'+
+							' <h3 class="h4"><img src="img/clients/@location.png"> @name</h3>'+
                              '   <i class="zmdi zmdi-check-circle @online"></i>'+
                          '   </div>'+
                           '  <div class="location-progress">'+
                           '      <div class="progress progress-sm">'+
-                             '       <div class="progress-bar" style="width: @load%;"></div>'+
+                             '       <div class="progress-bar" style="width: @cpu%;"></div>'+
                              '   </div>'+
                           '  </div>'+
                            ' <ul class="location-info list-styled">'+
-                           '     <li><span class="list-label">Network @network_rxandnetwork_tx</li>'+
-                           '     <li><span class="list-label">负载状态:</span> @load%</li>'+
+						   '     <li><span class="list-label">实时网络： @network_rxandnetwork_tx</li>'+
+                           '     <li><span class="list-label">流量合计： @network_trafficstr</li>'+
+						   '     <li><span class="list-label">IP连接数：共<font color="#0000FF"> @load </font>个连接</span></li>'+
+						   '     <li><span class="list-label">内存信息：@new_mem </span></li>'+
+						   '     <li><span class="list-label">交换分区：@new_swap</span></li>'+
+						   '     <li><span class="list-label">硬盘信息：@new_hdd</span></li>'+
                          '   </ul>'+
                       '  </div>'+
                    ' </div>';
       
-      var shinnerhtml='';
+      var shinnerhtml=''; 
       
       
 		$("#loading-notice").remove();
@@ -125,23 +129,54 @@ function uptime() {
           //----kaishi
           
           // Network
-				var newnetstr = "";
+				var newnetstr = "↓ ";
 				if(result.servers[i].network_rx < 1000)
 					newnetstr += result.servers[i].network_rx.toFixed(0) + "B";
 				else if(result.servers[i].network_rx < 1000*1000)
 					newnetstr += (result.servers[i].network_rx/1000).toFixed(0) + "K";
 				else
 					newnetstr += (result.servers[i].network_rx/1000/1000).toFixed(1) + "M";
-				newnetstr += " | "
+				newnetstr += " |↑ "
 				if(result.servers[i].network_tx < 1000)
 					newnetstr += result.servers[i].network_tx.toFixed(0) + "B";
 				else if(result.servers[i].network_tx < 1000*1000)
 					newnetstr += (result.servers[i].network_tx/1000).toFixed(0) + "K";
 				else
 					newnetstr += (result.servers[i].network_tx/1000/1000).toFixed(1) + "M";
-          
-          shinnerhtml+=shstr.replace("@name",result.servers[i].name).replace("@network_rxandnetwork_tx",newnetstr).replace("@type",result.servers[i].type).replace("@online",result.servers[i].online4?'text-success':'text-error').replace("@location",result.servers[i].location).replace("@load",result.servers[i].load).replace("@load",result.servers[i].load);
-          
+
+				//Traffic
+				var newtrafficstr = "↓ ";
+				if(result.servers[i].network_in < 1024)
+					newtrafficstr += result.servers[i].network_in.toFixed(0) + "B";
+				else if(result.servers[i].network_in < 1024*1024)
+					newtrafficstr += (result.servers[i].network_in/1024).toFixed(0) + "K";
+				else if(result.servers[i].network_in < 1024*1024*1024)
+					newtrafficstr += (result.servers[i].network_in/1024/1024).toFixed(1) + "M";
+				else if(result.servers[i].network_in < 1024*1024*1024*1024)
+					newtrafficstr += (result.servers[i].network_in/1024/1024/1024).toFixed(2) + "G";
+				else
+					newtrafficstr += (result.servers[i].network_in/1024/1024/1024/1024).toFixed(3) + "T";
+				newtrafficstr += " |↑ "
+				if(result.servers[i].network_out < 1024)
+					newtrafficstr += result.servers[i].network_out.toFixed(0) + "B";
+				else if(result.servers[i].network_out < 1024*1024)
+					newtrafficstr += (result.servers[i].network_out/1024).toFixed(0) + "K";
+				else if(result.servers[i].network_out < 1024*1024*1024)
+					newtrafficstr += (result.servers[i].network_out/1024/1024).toFixed(1) + "M";
+				else if(result.servers[i].network_out < 1024*1024*1024*1024)
+					newtrafficstr += (result.servers[i].network_out/1024/1024/1024).toFixed(2) + "G";
+				else
+					newtrafficstr += (result.servers[i].network_out/1024/1024/1024/1024).toFixed(3) + "T";
+
+					var new_mem = " ";
+					new_mem = bytesToSize(result.servers[i].memory_used*1024, 2) + " / " + bytesToSize(result.servers[i].memory_total*1024, 2);
+					var new_swap = " ";
+					new_swap = bytesToSize(result.servers[i].swap_used*1024, 2) + " / " + bytesToSize(result.servers[i].swap_total*1024, 2);
+					var new_hdd = " ";
+					new_hdd = bytesToSize(result.servers[i].hdd_used*1024*1024, 2) + " / " + bytesToSize(result.servers[i].hdd_total*1024*1024, 2);
+
+		  shinnerhtml+=shstr.replace("@name",result.servers[i].name).replace("@network_trafficstr",newtrafficstr).replace("@network_rxandnetwork_tx",newnetstr).replace("@type",result.servers[i].type).replace("@online",result.servers[i].online4?'text-success':'text-error').replace("@location",result.servers[i].location).replace("@cpu",result.servers[i].cpu).replace("@load",result.servers[i].load).replace("@new_mem",new_mem).replace("@new_swap",new_swap).replace("@new_hdd",new_hdd);
+
           
           
           //----jieshu
@@ -195,13 +230,13 @@ function uptime() {
 			}
 
 			// Online6
-			//if (result.servers[i].online6) {
-			//	TableRow.children["online6"].children[0].children[0].className = "progress-bar progress-bar-success";
-			//	TableRow.children["online6"].children[0].children[0].innerHTML = "<small>开启</small>";
-			//} else {
-			//	TableRow.children["online6"].children[0].children[0].className = "progress-bar progress-bar-danger";
-			//	TableRow.children["online6"].children[0].children[0].innerHTML = "<small>关闭</small>";
-			//}
+			// if (result.servers[i].online6) {
+			// 	TableRow.children["online6"].children[0].children[0].className = "progress-bar progress-bar-success";
+			// 	TableRow.children["online6"].children[0].children[0].innerHTML = "<small>有</small>";
+			// } else {
+			// 	TableRow.children["online6"].children[0].children[0].className = "progress-bar progress-bar-danger";
+			// 	TableRow.children["online6"].children[0].children[0].innerHTML = "<small>无</small>";
+			// }
 
 			// Name
 			TableRow.children["name"].innerHTML = result.servers[i].name;
@@ -382,7 +417,7 @@ function updateTime() {
 
 uptime();
 updateTime();
-setInterval(uptime, 2000);
+setInterval(uptime, 5000);
 setInterval(updateTime, 500);
 
 
