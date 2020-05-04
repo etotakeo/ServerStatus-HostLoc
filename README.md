@@ -26,6 +26,19 @@
 * 2017.04.29, 去除主机名设定
 * 2017.04.27, 增加一键部署脚本
 
+# Web修改显示
+* 只显示卡片-修改index.html
+``` bash
+<table class="table table-striped">
+改为
+<table class="table table-striped" style="display:none">
+保存即可
+```
+* 如果需要将刷新显示到最下方
+``` bash
+将81行到103行整体剪贴到第41行的下方(在41行<body>末尾回车、然后粘贴保存即可)
+```
+
 # 安装教程：     
 
 执行下面的代码下载并运行脚本。
