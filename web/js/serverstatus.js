@@ -111,7 +111,7 @@ function uptime() {
                            '     <li><span class="list-label">流量合计： @network_trafficstr</li>'+
 						   '     <li><span class="list-label">IP连接数：共<font color="#0000FF"> @load </font>个连接</span></li>'+
 						   '     <li><span class="list-label">内存信息：@new_mem </span></li>'+
-						   '     <li><span class="list-label">交换分区：@new_swap</span></li>'+
+						   //'     <li><span class="list-label">交换分区：@new_swap</span></li>'+
 						   '     <li><span class="list-label">硬盘信息：@new_hdd</span></li>'+
                          '   </ul>'+
                       '  </div>'+
