@@ -338,41 +338,41 @@ function uptime() {
 			}
 		};
       console.log(shinnerhtml);
-// $('#cards').html(shinnerhtml);
-// 		d = new Date(result.updated*1000);
-// 		error = 0;
-// 	}).fail(function(update_error) {
-// 		if (!error) {
-// 			$("#servers > tr.accordion-toggle").each(function(i) {
-// 				var TableRow = $("#servers tr#r" + i)[0];
-// 				var ExpandRow = $("#servers #rt" + i);
-// 				TableRow.children["online4"].children[0].children[0].className = "progress-bar progress-bar-error";
-// 				TableRow.children["online4"].children[0].children[0].innerHTML = "<small>错误</small>";
-// 				//TableRow.children["online6"].children[0].children[0].className = "progress-bar progress-bar-error";
-// 				//TableRow.children["online6"].children[0].children[0].innerHTML = "<small>错误</small>";
-// 				TableRow.children["uptime"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>错误</small></div></div>";
-// 				TableRow.children["load"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>错误</small></div></div>";
-// 				TableRow.children["network"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>错误</small></div></div>";
-// 				TableRow.children["traffic"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>错误</small></div></div>";
-// 				TableRow.children["cpu"].children[0].children[0].className = "progress-bar progress-bar-error";
-// 				TableRow.children["cpu"].children[0].children[0].style.width = "100%";
-// 				TableRow.children["cpu"].children[0].children[0].innerHTML = "<small>错误</small>";
-// 				TableRow.children["memory"].children[0].children[0].className = "progress-bar progress-bar-error";
-// 				TableRow.children["memory"].children[0].children[0].style.width = "100%";
-// 				TableRow.children["memory"].children[0].children[0].innerHTML = "<small>错误</small>";
-// 				TableRow.children["hdd"].children[0].children[0].className = "progress-bar progress-bar-error";
-// 				TableRow.children["hdd"].children[0].children[0].style.width = "100%";
-// 				TableRow.children["hdd"].children[0].children[0].innerHTML = "<small>错误</small>";
-// 				if(ExpandRow.hasClass("in")) {
-// 					ExpandRow.collapse("hide");
-// 				}
-// 				TableRow.setAttribute("data-target", "");
-// 				server_status[i] = false;
-// 			});
-// 		}
-// 		error = 1;
-// 		$("#updated").html("更新错误.");
-// 	});
+$('#cards').html(shinnerhtml);
+		d = new Date(result.updated*1000);
+		error = 0;
+	}).fail(function(update_error) {
+		if (!error) {
+			$("#servers > tr.accordion-toggle").each(function(i) {
+				var TableRow = $("#servers tr#r" + i)[0];
+				var ExpandRow = $("#servers #rt" + i);
+				TableRow.children["online4"].children[0].children[0].className = "progress-bar progress-bar-error";
+				TableRow.children["online4"].children[0].children[0].innerHTML = "<small>错误</small>";
+				//TableRow.children["online6"].children[0].children[0].className = "progress-bar progress-bar-error";
+				//TableRow.children["online6"].children[0].children[0].innerHTML = "<small>错误</small>";
+				TableRow.children["uptime"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>错误</small></div></div>";
+				TableRow.children["load"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>错误</small></div></div>";
+				TableRow.children["network"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>错误</small></div></div>";
+				TableRow.children["traffic"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>错误</small></div></div>";
+				TableRow.children["cpu"].children[0].children[0].className = "progress-bar progress-bar-error";
+				TableRow.children["cpu"].children[0].children[0].style.width = "100%";
+				TableRow.children["cpu"].children[0].children[0].innerHTML = "<small>错误</small>";
+				TableRow.children["memory"].children[0].children[0].className = "progress-bar progress-bar-error";
+				TableRow.children["memory"].children[0].children[0].style.width = "100%";
+				TableRow.children["memory"].children[0].children[0].innerHTML = "<small>错误</small>";
+				TableRow.children["hdd"].children[0].children[0].className = "progress-bar progress-bar-error";
+				TableRow.children["hdd"].children[0].children[0].style.width = "100%";
+				TableRow.children["hdd"].children[0].children[0].innerHTML = "<small>错误</small>";
+				if(ExpandRow.hasClass("in")) {
+					ExpandRow.collapse("hide");
+				}
+				TableRow.setAttribute("data-target", "");
+				server_status[i] = false;
+			});
+		}
+		error = 1;
+		$("#updated").html("更新错误.");
+	});
 }
 
 function updateTime() {
